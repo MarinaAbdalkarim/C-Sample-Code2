@@ -1,0 +1,81 @@
+//               Course:  CS2400-60 Computer Science 2
+//                 Name:  Abdalkarim, Marina
+//           Assignment:  Programming Assignment P3.2
+//               Remark:  The program calculates totals
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+void fill2DArray(int x[][5], int z, int y);
+void computeQtrlySums(int x[][5], int a[], int z, int y, int b);
+void computeBranchSums(int x[][5], int a[], int z, int y, int b);
+void displayYearlySalesReport(int x[][5], int a[], int d[], int z, int y);
+int main()
+{
+	const int row = 4, col = 5, quart = 4, bran = 5;
+	int sales[row][col];
+	int qtrlySum[quart];
+	int branchSum[bran];
+	fill2DArray(sales, row, col);
+	computeQtrlySums(sales, qtrlySum, row, col, quart);
+	computeBranchSums(sales, branchSum, row, col, bran);
+	displayYearlySalesReport(sales, qtrlySum, branchSum, row, col);
+	return 0;
+}
+void fill2DArray(int x[][5], int z, int y)
+{
+	cout << "Enter up to " << z << " rows of integers; " << endl;
+	cout << "Each row may contain up to " << y << " numbers." << endl;
+	for (int r = 0; r < z; r++)
+	{
+		cout << "Enter numbers for row #" << r + 1 << ": ";
+		for (int c = 0; c < y; c++)
+			cin >> x[r][c];
+	}
+}
+void computeQtrlySums(int x[][5], int a[], int z, int y, int b)
+{
+	int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+	for (int c = 0; c < y; c++)
+	{
+			sum1 += x[0][c];
+			sum2 += x[1][c];
+			sum3 += x[2][c];
+			sum4 += x[3][c];
+	}
+	a[0] = sum1;
+	a[1] = sum2;
+	a[2] = sum3;
+	a[3] = sum4;
+}
+void computeBranchSums(int x[][5], int a[], int z, int y, int b)
+{
+	int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
+	for (int r = 0; r < z; r++)
+	{
+		sum1 += x[r][0];
+		sum2 += x[r][1];
+		sum3 += x[r][2];
+		sum4 += x[r][3];
+		sum5 += x[r][4];
+	}
+	a[0] = sum1;
+	a[1] = sum2;
+	a[2] = sum3;
+	a[3] = sum4;
+	a[4] = sum5;
+}
+void displayYearlySalesReport(int x[][5], int a[], int d[], int z, int y)
+{
+	for (int r = 0; r < z; r++)
+	{
+		cout << setw(12) << "";
+		for (int c = 0; c < y; c++)
+			cout << setw(4) << x[r][c] << "      ";
+		cout << setw(4) << a[r] << endl;
+	}
+	cout << setw(12) << "";
+	for (int c = 0; c < y; c++)
+		cout << setw(4) << d[c] << "     ";
+	cout << endl << endl;
+}
