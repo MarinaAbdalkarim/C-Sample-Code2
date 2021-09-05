@@ -1,0 +1,100 @@
+//               Course:  CS2400-60 Computer Science 2
+//                 Name:  Abdalkarim, Marina
+//       Assignment:  Programming Assignment P4.1
+//    Date assigned: 10/13/18
+//            Date due: 10/23/17
+//  Date handed in: 10/23/17
+//              Remark: The program tests all functions.
+#include <iostream>
+#include <string>
+using namespace std;
+struct stuRec		// creates a new record “data type named "stuRec"
+{
+	string name;	// 1st  data member  of stuRec type
+	int credits;	// 2nd data member of stuRec type
+	double gpa;	// 3rd data member of stuRec type
+};
+void fillRec(stuRec &sobj);
+//  Precondition: a stuRec record (or object) sobj is passed to the function by reference (must!)
+// user is prompted to enter name, credits completed, and GPA for the student
+// Postcondition: stuRec record referenced by sobj is filled or loaded with three values entered by 
+// the user
+void display(stuRec &sobj);
+// Postcondition: contents of sobj is displayed (the format can be found in the sample output 
+// below)
+void sortByName(stuRec s[], int n);
+//  Precondition: an array of n student records is passed to the function; array is fully loaded with 
+// data
+// Postcondition: n records have been sorted by name alphabetically
+void sortByGPA(stuRec s[], int n);
+// Postcondition: n records have been sorted by GPA in descending order
+void swap(stuRec &s1, stuRec &s2);
+//  Precondition: two student records are passed to the function by reference (must!)
+int main()
+{
+	const int SIZE = 3;
+	stuRec s[SIZE];
+	for (int i = 0; i < SIZE; i++)
+		fillRec(s[i]);
+	cout << endl << "The three student records entered by the user are: " << endl;
+	for (int i = 0; i < SIZE; i++)
+		display(s[i]);
+	cout << "...Sorting by Name..." << endl;
+	sortByName(s, SIZE);
+	for (int i = 0; i < SIZE; i++)
+		display(s[i]);
+	cout << endl;
+	cout << "...Sorting by GPA..." << endl;
+	sortByGPA(s, SIZE);
+	for (int i = 0; i < SIZE; i++)
+		display(s[i]);
+	cout << endl;
+    return 0;
+}
+void fillRec(stuRec &sobj)
+{
+	cout << "Enter name, credit, gpa: ";
+	cin >> sobj.name >> sobj.credits >> sobj.gpa;
+}
+void display(stuRec &sobj)
+{
+	cout << "Name: " << sobj.name << endl;
+	cout << "Credit: " << sobj.credits << endl;
+	cout << "GPA: " << sobj.gpa << endl << endl;
+}
+void sortByName(stuRec s[], int n)
+{
+	for (int pass = 1; pass < n; pass++)
+	{
+		for (int c = 0; c < n - pass; c++)
+		{
+			if (s[c].name > s[c + 1].name)
+			{
+				swap(s[c].gpa, s[c + 1].gpa);
+				swap(s[c].name, s[c + 1].name);
+				swap(s[c].credits, s[c + 1].credits);
+			}
+		}
+	}
+}
+void sortByGPA(stuRec s[], int n)
+{
+	for (int pass = 1; pass < n; pass++)
+	{
+		for (int c = 0; c < n - pass; c++)
+		{
+			if (s[c].gpa > s[c + 1].gpa)
+			{
+				swap(s[c].gpa, s[c + 1].gpa);
+				swap(s[c].name, s[c + 1].name);
+				swap(s[c].credits, s[c + 1].credits);
+			}
+		}
+	}
+}
+void swap(stuRec &s1, stuRec &s2)
+{
+	stuRec temp = s1;
+	s1 = s2;
+	s2 = temp;
+}
