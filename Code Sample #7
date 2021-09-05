@@ -30,7 +30,7 @@ void computeIntrest();
 private:
 string acctNo;      	            // e.g., A1234
 double balance;
-static double annualRate;  	// classwide; store in a memory location shared by objects 
+static double annualRate;  	    // classwide; store in a memory location shared by objects 
 double interest;    	            // monthly interest
 };
 double savingsAcct::annualRate;
