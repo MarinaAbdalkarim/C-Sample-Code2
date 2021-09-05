@@ -19,16 +19,14 @@ public:
 	// Second constructor
 	// Postcondition: the newly declared data object is initialized to mm/dd/yyyy
 	void setDate(int mm, int dd, int yyyy);
-	// Postcondition: set the contents of the calling date object to the values passed to the 
-//function
+	// Postcondition: set the contents of the calling date object to the values passed to the function
 	void displayDateV1();
 	// Postcondition: display the calling date object in mm/dd/yyyy format, e.g., 02/22/2017
 	void displayDateV2();
 	// Postcondition: display the calling date object in the  format like: February 22, 2017
 	int compareDates(date &dObj);
 	// compares the two date objects: the calling one the dObj that is passed to the function
-	// Postcondition: returns -1, 0, or 1 if the calling date object if less than, equal to, or   
-//greater than dObj, respectively.
+	// Postcondition: returns -1, 0, or 1 if the calling date object if less than, equal to, or greater than dObj, respectively.
 };
 int main()
 {
