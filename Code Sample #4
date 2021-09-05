@@ -1,10 +1,7 @@
 //               Course:  CS2400-60 Computer Science 2
 //                 Name:  Abdalkarim, Marina
-//       Assignment:  Programming Assignment P4.1
-//    Date assigned: 10/13/18
-//            Date due: 10/23/17
-//  Date handed in: 10/23/17
-//              Remark: The program tests all functions.
+//           Assignment:  Programming Assignment P4.1
+//               Remark:  The program tests all functions.
 #include <iostream>
 #include <string>
 using namespace std;
@@ -15,16 +12,12 @@ struct stuRec		// creates a new record “data type named "stuRec"
 	double gpa;	// 3rd data member of stuRec type
 };
 void fillRec(stuRec &sobj);
-//  Precondition: a stuRec record (or object) sobj is passed to the function by reference (must!)
-// user is prompted to enter name, credits completed, and GPA for the student
-// Postcondition: stuRec record referenced by sobj is filled or loaded with three values entered by 
-// the user
+// Precondition: a stuRec record (or object) sobj is passed to the function by reference (must!) user is prompted to enter name, credits completed, and GPA for the student
+// Postcondition: stuRec record referenced by sobj is filled or loaded with three values entered by the user
 void display(stuRec &sobj);
-// Postcondition: contents of sobj is displayed (the format can be found in the sample output 
-// below)
+// Postcondition: contents of sobj is displayed (the format can be found in the sample output below)
 void sortByName(stuRec s[], int n);
-//  Precondition: an array of n student records is passed to the function; array is fully loaded with 
-// data
+// Precondition: an array of n student records is passed to the function; array is fully loaded with data
 // Postcondition: n records have been sorted by name alphabetically
 void sortByGPA(stuRec s[], int n);
 // Postcondition: n records have been sorted by GPA in descending order
