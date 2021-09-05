@@ -1,0 +1,146 @@
+//               Course:  CS2400-60 Computer Science 2
+//                 Name:  Abdalkarim, Marina
+//           Assignment:  Programming Assignment P5.2
+//               Remark:  The program tests all functions.
+#include <iostream>
+#include <string>
+using namespace std;
+struct rational
+{
+	int num;	// numerator
+	int den;	// denominator; b ≠ 0
+};
+int fillArray(rational r[], int size);
+// Precondition: address & physical size of the rational array declared in the calling function must be passed to the function
+// Postcondition: returns the actual # of rational numbers entered by user which must be less than or equal to size
+void displayArray(rational r[], int n);
+// Postcondition: display n rational numbers
+void sortRationalNumbers(rational r[], int n);
+// Precondition: address of the rational array declared in the calling function and the # of elements to be sorted must be passed to the function
+// Postcondition: n rational number is the array are sorted in ascending order
+int findSmallestRationalNumber(rational r[], int first, int n);
+// Precondition: accepts address, subscript value of the first element of the unsorted sub-list, and the # of array elements n 
+// Postcondition: returns subscript value of the smallest rational number in the unsorted sub-list of the array
+void swap(rational &r1, rational &r2);
+// Postcondition: contents of memory locations referenced by r1 and r2 are swapped
+int GCD(const rational &r);
+// You must use the Euclidean algorithm. https://en.wikipedia.org/wiki/Euclidean_algorithm
+// Postcondition: returns the "greatest common divisor" between r.a and r.b
+int main()
+{
+	const int SIZE = 6;
+	rational s[SIZE];
+	int fill, small = 0;
+	findSmallestRationalNumber(s, small, SIZE);
+	fill = fillArray(s, SIZE);
+	cout << endl << endl;
+	cout << "Before sort, array contains: " << endl;
+	displayArray(s, SIZE);
+	cout << endl;
+	sortRationalNumbers(s, SIZE);
+	cout << endl;
+	cout << "...Sorting..." << endl << endl;
+	displayArray(s, SIZE);
+	cout << endl;
+	return 0;
+}
+int fillArray(rational r[], int size)
+{
+	char ask = 'y';
+	int more = 1;
+	int i = 0;
+	do
+	{
+		cout << "Enter numerator and then denominator for a rational number: ";
+		cin >> r[i].num >> r[i].den;
+		cout << "More rational numbers? (Y/N) ";
+		cin >> ask;
+		i++;
+		more++;
+	} while (ask == 'y' || ask == 'Y');
+	return more;
+}
+void displayArray(rational r[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		int gcd = GCD(r[i]);
+		int a = r[i].num / gcd;
+		int b = r[i].den / gcd;
+		if (b < 0)
+		{
+			a = a * (-1);
+			b = b * (-1);
+		}
+		cout << a << "/" << b << "     ";
+	}
+}
+void sortRationalNumbers(rational r[], int n)
+{
+	for (int pass = 1; pass < n; pass++)
+	{
+		for (int c = 0; c < n - pass; c++)
+		{
+			double a, b, d, e;
+			a = r[c].num;
+			b = r[c].den;
+			d = r[c + 1].num;
+			e = r[c + 1].den;
+			double trial1, trial2;
+			trial1 = a / b;
+			trial2 = d / e;
+			if (trial1 > trial2)
+				swap(r[c], r[c + 1]);
+			int small;
+			small = findSmallestRationalNumber(r, c, n);
+			swap(r[0], r[small]);
+		}
+	}
+}
+int findSmallestRationalNumber(rational r[], int first, int n)
+{
+	rational small = r[first];
+	for (int i = first + 1; i < n; i++)
+	{
+		double a, b, c, d, e, f;
+		a = r[i].num;
+		b = r[i].den;
+		c = a / b;
+		d = r[first].num;
+		e = r[first].den;
+		f = d / e;
+		if (c < f)
+		{
+			small = r[i];
+			first = i;
+		}
+		else
+		{
+			small = r[first];
+			first = first;
+		}
+	}
+	return first;
+}
+void swap(rational &r1, rational &r2)
+{
+	double temp1, temp2;
+	temp1 = r1.num;
+	r1.num = r2.num;
+	r2.num = temp1;
+	temp2 = r1.den;
+	r1.den = r2.den;
+	r2.den = temp2;
+}
+int GCD(const rational &r)
+{
+	int a = 0, b = 0;
+	int remainder = r.num % r.den;
+	while (remainder != 0)
+	{
+		a = r.den;
+		b = remainder;
+		remainder = a % b;
+	}
+	return b;
+}
